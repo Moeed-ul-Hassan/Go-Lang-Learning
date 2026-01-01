@@ -12,5 +12,4 @@ func main() {
 	fmt.Println("Enter text:")
 	input, _ := reader.ReadString('\n')
 	fmt.Println("You entered:", input)
-
 }
