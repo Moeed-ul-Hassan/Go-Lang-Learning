@@ -9,8 +9,6 @@ import (
 	"time"
 )
 
-var loc, _ = time.LoadLocation("UTC") // Global location variable for consistency
-
 func inptaking() {
 	reader := bufio.NewReader(os.Stdin)
 	layout := "2006-01-02 15:04" // Define layout once
@@ -67,6 +65,7 @@ func inptaking() {
 		int(duration.Hours()), int(duration.Minutes())%60, int(duration.Seconds())%60)
 
 }
-func main() {
-	inptaking()
-}
+
+// func main() {
+// 	inptaking()
+// }

@@ -30,6 +30,7 @@ func prtimgen() {
 	}
 	fmt.Printf("Hello, %s! Today is %s.\n", username, dantim)
 }
-func main() {
-	prtimgen()
-}
+
+// func main() {
+// 	prtimgen()
+// }
