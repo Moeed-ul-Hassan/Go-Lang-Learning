@@ -1,275 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Go Learning Roadmap</title>
+    <title>Go Learning Blackboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Permanent+Marker&display=swap"
+        rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent: #38bdf8;
-            --success: #4ade80;
-            --warning: #fbbf24;
+            --chalk-white: #ecf0f1;
+            --chalk-yellow: #f1c40f;
+            --chalk-red: #e74c3c;
+            --chalk-blue: #3498db;
+            --chalk-green: #2ecc71;
+            --board-bg: #1e392a;
+            --wood-color: #5d4037;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
             margin: 0;
-            padding: 2rem;
-            line-height: 1.6;
+            padding: 40px;
+            background-color: #2c3e50;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2334495e' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            font-family: 'Patrick Hand', 'Segoe Print', 'Comic Sans MS', cursive;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
+        .blackboard {
+            background-color: var(--board-bg);
+            width: 100%;
+            max-width: 1200px;
+            border: 25px solid var(--wood-color);
+            border-radius: 8px;
+            box-shadow:
+                0 0 0 5px #3e2723,
+                /* Inner wood shadow */
+                0 20px 50px rgba(0, 0, 0, 0.5),
+                /* Drop shadow */
+                inset 0 0 150px rgba(0, 0, 0, 0.7);
+            /* Vignette */
+            padding: 40px;
+            position: relative;
+            color: var(--chalk-white);
+            overflow: hidden;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid #334155;
+        /* Chalk dust texture overlay */
+        .blackboard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(to right, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Permanent Marker', cursive;
+            text-align: center;
+            font-size: 4rem;
+            margin: 0 0 40px 0;
+            color: var(--chalk-white);
+            text-shadow: 4px 4px 0 rgba(255, 255, 255, 0.1);
+            transform: rotate(-2deg);
         }
 
-        .goal-card {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid #334155;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: '';
+        .chalk-tray {
             position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #334155;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 15px;
+            background: #4e342e;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .week-card {
-            background-color: var(--card-bg);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            position: relative;
-            border: 1px solid #334155;
-            transition: transform 0.2s;
-        }
-
-        .week-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent);
-        }
-
-        .week-card::before {
+        .chalk-tray::after {
             content: '';
+            /* Chalk pieces */
             position: absolute;
-            left: -2.4rem;
-            top: 1.5rem;
-            width: 1rem;
-            height: 1rem;
-            border-radius: 50%;
-            background-color: var(--card-bg);
-            border: 2px solid var(--accent);
+            top: -5px;
+            left: 20px;
+            width: 40px;
+            height: 8px;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 50px 0 0 var(--chalk-yellow), 100px 0 0 var(--chalk-red);
         }
 
-        .week-card.completed::before {
-            background-color: var(--success);
-            border-color: var(--success);
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
         }
 
-        .week-card.active::before {
-            background-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
+        .week-section {
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            position: relative;
         }
 
-        .status-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
+        .week-section:hover {
+            transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
-        .status-completed {
-            background-color: rgba(74, 222, 128, 0.1);
-            color: var(--success);
+        .week-section.active {
+            border: 3px solid var(--chalk-yellow);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 20px rgba(241, 196, 15, 0.1);
         }
 
-        .status-active {
-            background-color: rgba(56, 189, 248, 0.1);
-            color: var(--accent);
-        }
-
-        .status-upcoming {
-            background-color: rgba(148, 163, 184, 0.1);
-            color: var(--text-secondary);
+        .week-section.completed {
+            border-color: var(--chalk-green);
+            opacity: 0.8;
         }
 
         h2 {
+            font-size: 2rem;
             margin-top: 0;
-            color: var(--text-primary);
+            margin-bottom: 10px;
+            color: var(--chalk-yellow);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .week-date {
+            display: block;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+            font-style: italic;
         }
 
         ul {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
         }
 
         li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            padding-left: 30px;
             position: relative;
+            line-height: 1.4;
         }
 
         li::before {
-            content: '→';
+            content: '○';
             position: absolute;
             left: 0;
-            color: var(--accent);
+            color: var(--chalk-blue);
+            font-weight: bold;
         }
 
-        .sub-schedule {
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .sub-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #334155;
-        }
-
-        .sub-item:last-child {
-            border-bottom: none;
-        }
-
-        .done {
+        li.done {
             text-decoration: line-through;
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        li.done::before {
+            content: '✓';
+            color: var(--chalk-green);
+        }
+
+        li.current {
+            color: var(--chalk-red);
+            font-weight: bold;
+            transform: scale(1.05);
+            transform-origin: left;
+        }
+
+        li.current::before {
+            content: '➜';
+            color: var(--chalk-red);
+        }
+
+        .sticky-note {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            width: 200px;
+            background: #f1c40f;
+            color: #2c3e50;
+            padding: 20px;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1.2rem;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+            transform: rotate(3deg);
+            z-index: 10;
+        }
+
+        .sticky-note::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            /* Tape look */
+            transform: rotate(-3deg);
+        }
+
+        .speed-badge {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: var(--chalk-red);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            transform: rotate(10deg);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            font-size: 1rem;
+            z-index: 5;
+            border: 2px solid white;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .sticky-note {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 0 auto 30px auto;
+                transform: rotate(0);
+            }
+
+            body {
+                padding: 10px;
+            }
+
+            .blackboard {
+                padding: 20px;
+                border-width: 15px;
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <h1>Go Learning Roadmap 🚀</h1>
-            <p>Target: Freelancing by Feb 2026 | Job in Slovenia by 2027</p>
-        </header>
+    <div class="blackboard">
+        <div class="content-wrapper">
+            <h1>Go Learning Roadmap</h1>
 
-        <div class="goal-card">
-            <h3>Daily Routine (3:00 PM - 8:00 PM)</h3>
-            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-                <div>📚 <strong>1.5h</strong> Theory</div>
-                <div>☕ <strong>0.5h</strong> Review</div>
-                <div>💻 <strong>2.0h</strong> Coding</div>
-                <div>🛠️ <strong>1.0h</strong> Projects</div>
-            </div>
-        </div>
-
-        <div class="timeline">
-            <!-- Week 1 -->
-            <div class="week-card completed">
-                <span class="status-badge status-completed">COMPLETED</span>
-                <h2>Week 1: Fundamentals</h2>
-                <p class="date">Jan 5 - Jan 11</p>
-                <ul>
-                    <li class="done">Basic Syntax & Variables</li>
-                    <li class="done">Control Flow (if/else, switch)</li>
-                    <li class="done">Functions & Loops</li>
-                    <li class="done">Arrays & Slices</li>
-                </ul>
+            <div class="sticky-note">
+                <strong>Goal:</strong><br>
+                Freelancing by Feb 2026!<br>
+                Job in Slovenia by 2027! 🚀
             </div>
 
-            <!-- Week 2 -->
-            <div class="week-card active">
-                <span class="status-badge status-active">CURRENT WEEK</span>
-                <h2>Week 2: Data Structures & Pointers</h2>
-                <p class="date">Jan 12 - Jan 18</p>
-                
-                <div class="sub-schedule">
-                    <div class="sub-item">
-                        <span class="done">Maps & Structs</span>
-                        <span style="color: var(--success)">✓ Done</span>
-                    </div>
-                    <div class="sub-item">
-                        <span><strong>Pointers</strong> (2 Days)</span>
-                        <span style="color: var(--warning)">Next Up</span>
-                    </div>
-                    <div class="sub-item">
-                        <span>Methods (2 Days)</span>
-                        <span>Upcoming</span>
-                    </div>
-                    <div class="sub-item">
-                        <span>Interfaces (2 Days)</span>
-                        <span>Upcoming</span>
-                    </div>
+            <div class="grid-container">
+                <!-- Week 1 -->
+                <div class="week-section completed">
+                    <div class="speed-badge">CRUSHED IT! 🔥</div>
+                    <h2>Week 1: Fundamentals</h2>
+                    <span class="week-date" style="text-decoration: line-through;">Jan 5 - Jan 11</span>
+                    <span class="week-date" style="color: var(--chalk-green);">Done by Jan 6!</span>
+                    <ul>
+                        <li class="done">Basic Syntax & Vars</li>
+                        <li class="done">Control Flow (if/switch)</li>
+                        <li class="done">Functions & Loops</li>
+                        <li class="done">Arrays & Slices</li>
+                    </ul>
+                </div>
+
+                <!-- Week 2 -->
+                <div class="week-section active">
+                    <div class="speed-badge" style="background: var(--chalk-blue);">AHEAD OF TIME ⚡</div>
+                    <h2>Week 2: Data Structures</h2>
+                    <span class="week-date">Started Jan 6 (Originally Jan 12)</span>
+                    <ul>
+                        <li class="done">Maps & Structs</li>
+                        <li class="current">Pointers (Next Up)</li>
+                        <li>Methods</li>
+                        <li>Interfaces</li>
+                    </ul>
+                </div>
+
+                <!-- Week 3 -->
+                <div class="week-section">
+                    <h2>Week 3: Concurrency</h2>
+                    <span class="week-date">Jan 19 - Jan 25</span>
+                    <ul>
+                        <li>Goroutines</li>
+                        <li>Channels</li>
+                        <li>Mutexes & Sync</li>
+                        <li>Error Handling</li>
+                    </ul>
+                </div>
+
+                <!-- Week 4 -->
+                <div class="week-section">
+                    <h2>Week 4: I/O & Libs</h2>
+                    <span class="week-date">Jan 26 - Feb 1</span>
+                    <ul>
+                        <li>File Operations</li>
+                        <li>JSON Parsing</li>
+                        <li>HTTP Server</li>
+                    </ul>
+                </div>
+
+                <!-- Week 5 -->
+                <div class="week-section">
+                    <h2>Week 5: Advanced</h2>
+                    <span class="week-date">Feb 2 - Feb 8</span>
+                    <ul>
+                        <li>Testing</li>
+                        <li>Databases (SQL)</li>
+                        <li>REST API Project</li>
+                    </ul>
                 </div>
             </div>
-
-            <!-- Week 3 -->
-            <div class="week-card">
-                <span class="status-badge status-upcoming">UPCOMING</span>
-                <h2>Week 3: Concurrency</h2>
-                <p class="date">Jan 19 - Jan 25</p>
-                <ul>
-                    <li>Goroutines & Channels</li>
-                    <li>Mutexes & Sync</li>
-                    <li>Error Handling</li>
-                </ul>
-            </div>
-
-            <!-- Week 4 -->
-            <div class="week-card">
-                <span class="status-badge status-upcoming">UPCOMING</span>
-                <h2>Week 4: I/O & Standard Lib</h2>
-                <p class="date">Jan 26 - Feb 1</p>
-                <ul>
-                    <li>File Operations (OS, Bufio)</li>
-                    <li>JSON Encoding/Decoding</li>
-                    <li>Basic HTTP Server</li>
-                </ul>
-            </div>
-
-            <!-- Week 5 -->
-            <div class="week-card">
-                <span class="status-badge status-upcoming">UPCOMING</span>
-                <h2>Week 5: Advanced & Project</h2>
-                <p class="date">Feb 2 - Feb 8</p>
-                <ul>
-                    <li>Testing & Dependency Mgmt</li>
-                    <li>Database Interaction (SQL)</li>
-                    <li>REST API Build</li>
-                </ul>
-            </div>
         </div>
+        <div class="chalk-tray"></div>
     </div>
 </body>
+
 </html>
