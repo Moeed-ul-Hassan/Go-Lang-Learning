@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"sort"
+	"sort" // sort package is used for sorting slices
 )
 
 func main() {
@@ -20,7 +20,7 @@ func main() {
 	// 3. Slicing operations [start:end]
 	// start is inclusive, end is exclusive
 	fmt.Println("Slicing [1:3]: ", fruitList[1:3])
-	fmt.Println("Slicing [1:]: ", fruitList[1:])
+	fmt.Println("Slicing [0:]: ", fruitList[0:])
 	fmt.Println("Slicing [:3]: ", fruitList[:3])
 
 	// 4. Using make() to create a slice

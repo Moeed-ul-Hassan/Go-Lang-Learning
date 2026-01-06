@@ -24,9 +24,8 @@ func main() {
 	// 3. Iterating through an array
 	fmt.Println("Iterating through vegList:")
 	for i := 0; i < len(vegList); i++ {
-		fmt.Printf("Index %d: %s\n", i, vegList[i])
+		fmt.Printf("index is : %d value is : %s\n", i, vegList[i])
 	}
-
 	// 4. Using range for iteration
 	fmt.Println("Iterating using range:")
 	for index, value := range vegList {

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Learning Roadmap</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #38bdf8;
+            --success: #4ade80;
+            --warning: #fbbf24;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .goal-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #334155;
+        }
+
+        .week-card {
+            background-color: var(--card-bg);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            border: 1px solid #334155;
+            transition: transform 0.2s;
+        }
+
+        .week-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .week-card::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 1.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            border: 2px solid var(--accent);
+        }
+
+        .week-card.completed::before {
+            background-color: var(--success);
+            border-color: var(--success);
+        }
+
+        .week-card.active::before {
+            background-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status-completed {
+            background-color: rgba(74, 222, 128, 0.1);
+            color: var(--success);
+        }
+
+        .status-active {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+        }
+
+        .status-upcoming {
+            background-color: rgba(148, 163, 184, 0.1);
+            color: var(--text-secondary);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--text-primary);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .sub-schedule {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .sub-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .sub-item:last-child {
+            border-bottom: none;
+        }
+
+        .done {
+            text-decoration: line-through;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Go Learning Roadmap 🚀</h1>
+            <p>Target: Freelancing by Feb 2026 | Job in Slovenia by 2027</p>
+        </header>
+
+        <div class="goal-card">
+            <h3>Daily Routine (3:00 PM - 8:00 PM)</h3>
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                <div>📚 <strong>1.5h</strong> Theory</div>
+                <div>☕ <strong>0.5h</strong> Review</div>
+                <div>💻 <strong>2.0h</strong> Coding</div>
+                <div>🛠️ <strong>1.0h</strong> Projects</div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <!-- Week 1 -->
+            <div class="week-card completed">
+                <span class="status-badge status-completed">COMPLETED</span>
+                <h2>Week 1: Fundamentals</h2>
+                <p class="date">Jan 5 - Jan 11</p>
+                <ul>
+                    <li class="done">Basic Syntax & Variables</li>
+                    <li class="done">Control Flow (if/else, switch)</li>
+                    <li class="done">Functions & Loops</li>
+                    <li class="done">Arrays & Slices</li>
+                </ul>
+            </div>
+
+            <!-- Week 2 -->
+            <div class="week-card active">
+                <span class="status-badge status-active">CURRENT WEEK</span>
+                <h2>Week 2: Data Structures & Pointers</h2>
+                <p class="date">Jan 12 - Jan 18</p>
+                
+                <div class="sub-schedule">
+                    <div class="sub-item">
+                        <span class="done">Maps & Structs</span>
+                        <span style="color: var(--success)">✓ Done</span>
+                    </div>
+                    <div class="sub-item">
+                        <span><strong>Pointers</strong> (2 Days)</span>
+                        <span style="color: var(--warning)">Next Up</span>
+                    </div>
+                    <div class="sub-item">
+                        <span>Methods (2 Days)</span>
+                        <span>Upcoming</span>
+                    </div>
+                    <div class="sub-item">
+                        <span>Interfaces (2 Days)</span>
+                        <span>Upcoming</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 3 -->
+            <div class="week-card">
+                <span class="status-badge status-upcoming">UPCOMING</span>
+                <h2>Week 3: Concurrency</h2>
+                <p class="date">Jan 19 - Jan 25</p>
+                <ul>
+                    <li>Goroutines & Channels</li>
+                    <li>Mutexes & Sync</li>
+                    <li>Error Handling</li>
+                </ul>
+            </div>
+
+            <!-- Week 4 -->
+            <div class="week-card">
+                <span class="status-badge status-upcoming">UPCOMING</span>
+                <h2>Week 4: I/O & Standard Lib</h2>
+                <p class="date">Jan 26 - Feb 1</p>
+                <ul>
+                    <li>File Operations (OS, Bufio)</li>
+                    <li>JSON Encoding/Decoding</li>
+                    <li>Basic HTTP Server</li>
+                </ul>
+            </div>
+
+            <!-- Week 5 -->
+            <div class="week-card">
+                <span class="status-badge status-upcoming">UPCOMING</span>
+                <h2>Week 5: Advanced & Project</h2>
+                <p class="date">Feb 2 - Feb 8</p>
+                <ul>
+                    <li>Testing & Dependency Mgmt</li>
+                    <li>Database Interaction (SQL)</li>
+                    <li>REST API Build</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
