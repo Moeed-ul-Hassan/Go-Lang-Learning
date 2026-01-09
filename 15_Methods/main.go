@@ -2,24 +2,41 @@ package main
 
 import "fmt"
 
-type User struct {
-	Name  string
-	Email string
-	Age   int
+type user struct {
+	name  string
+	age   int
+	email string
 }
 
-// Value Receiver: Works on a copy
-func (u User) Greet() {
-	fmt.Printf("Hello, my name is %s and my email is %s\n", u.Name, u.Email)
+func (u user) greet() {
+	fmt.Printf("Hello, my name is %s, I am %d years old, and my email is %s\n", u.name, u.age, u.email)
 }
 
-// TODO: Add a Pointer Receiver method called UpdateEmail here
+// TODO: Practice Pointer Receivers
+// 1. Create a method called 'updateEmail' that takes a newEmail string.
+// 2. It MUST use a pointer receiver (*user) so it can change the actual data.
+// 3. Inside the method, set u.email = newEmail.
+func (u *user) updateEmail(newEmail string) {
+	u.email = newEmail
+}
+
+// TODO: Another Practice
+// 1. Create a method called 'incrementAge' with a pointer receiver.
+// 2. It should increase the user's age by 1.
+// 3. Call it in main() and print the user's age to verify.
 
 func main() {
-	myUser := User{"Moeed", "moeed@example.com", 22}
-	myUser.Greet()
+	myUser := user{name: "Moeed", age: 22, email: "moeed@google.com"}
+	myUser.greet()
+	myUser.updateEmail("moeed.new@gmail.com")
+	fmt.Println("--- After Update ---")
+	myUser.greet()
+	myUser.incrementAge()
+	fmt.Println("--- After Increment ---")
+	myUser.greet()
+}
 
-	// After you implement UpdateEmail, call it here:
-	// myUser.UpdateEmail("newemail@example.com")
-	// myUser.Greet()
+// 4. Test incrementAge here:
+func (u *user) incrementAge() {
+	u.age++
 }
