@@ -1,6 +1,7 @@
 package main
 
 //I am going to learn one of the Toughest and hardest topics in Go Lang; Interfaces;
+// First thing is that  : First Declare the interface then implement it. then Push values and print it...
 import (
 	"fmt"
 	"math"
@@ -29,15 +30,15 @@ type square struct {
 // A type implements an interface by implementing its methods.
 // There is no "implements" keyword in Go!
 func (c circle) area() float64 {
-	return math.Pi * c.radius * c.radius
+	return math.Pi * c.radius * c.radius //3.14 x radius x radius
 }
 
 func (r rectangle) area() float64 {
-	return r.width * r.height
+	return r.width * r.height //width x height
 }
 
 func (s square) area() float64 {
-	return s.side * s.side
+	return s.side * s.side //side x side
 }
 
 // 4. Use the interface as a type
@@ -48,6 +49,8 @@ func printArea(s shape) {
 func main() {
 	c := circle{radius: 5}
 	r := rectangle{width: 10, height: 5}
+	sq := square{side: 4}
+	sq2 := square2{side: 4}
 
 	fmt.Println("Circle:")
 	printArea(c) // circle implements shape
@@ -55,12 +58,14 @@ func main() {
 	fmt.Println("Rectangle:")
 	printArea(r) // rectangle implements shape
 
-	sq := square{side: 4}
 	fmt.Println("Square:")
 	printArea(sq) // square implements shape
+
+	fmt.Println("Square2:")
+	printArea(sq2) // square2 implements shape
 }
 
-//Syntax
+// Syntax
 // type InterfaceName interface {
 //     MethodName(input1 type, input2 type) returnType
 //     AnotherMethod() string
@@ -70,3 +75,10 @@ func main() {
 // 1. Create a new struct called 'square' with a 'side' field.
 // 2. Implement the 'area()' method for 'square'.
 // 3. Create a square in main() and call 'printArea()' with it.
+type square2 struct {
+	side float64
+}
+
+func (s square2) area() float64 {
+	return s.side * s.side
+}

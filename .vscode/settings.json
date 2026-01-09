@@ -32,5 +32,6 @@
     "workbench.list.smoothScrolling": true,
     "workbench.editor.limit.enabled": true,
     "workbench.editor.limit.value": 5,
-    "workbench.editor.limit.perEditorGroup": true
+    "workbench.editor.limit.perEditorGroup": true,
+    "workbench.colorTheme": "Catppuccin Macchiato"
 }
