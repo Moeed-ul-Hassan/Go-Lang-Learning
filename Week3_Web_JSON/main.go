@@ -14,18 +14,18 @@ type Message struct {
 }
 
 func mainserver() {
-	//It is Compulsory to Write This as they are routes for our server
+	//It is Compulsory to Write This as they are routes/Maps for our server
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", homeHandler)
-	mux.HandleFunc("/hello/", helloHandler)  //it will handle /hello/{name}
-	mux.HandleFunc("/search", searchHandler) //It will handle /search?q=term
-	mux.HandleFunc("/echo", echoHandler)     //It will handle POST /echo expects JSON {"text":"..."} and echoes it back
-	mux.HandleFunc("/submit", submitHandler) //It will handle POST /submit expects form data and returns it as JSON
-	mux.HandleFunc("/data", dataHandler)     //It will handle GET /data returns a static JSON array of courses (example data)
+	mux.HandleFunc("/hello/", helloHandler)
+	mux.HandleFunc("/search", searchHandler)
+	mux.HandleFunc("/echo", echoHandler)
+	mux.HandleFunc("/submit", submitHandler)
+	mux.HandleFunc("/data", dataHandler)
 	mux.HandleFunc("/about", aboutHandler)
 
 	fmt.Println("Starting server on http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	log.Fatal(http.ListenAndServe(":8080", mux)) //Server Starter
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
