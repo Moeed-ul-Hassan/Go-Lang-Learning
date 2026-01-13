@@ -23,6 +23,7 @@ func mainserver() {
 	mux.HandleFunc("/submit", submitHandler)
 	mux.HandleFunc("/data", dataHandler)
 	mux.HandleFunc("/about", aboutHandler)
+	mux.HandleFunc("/status", statusHandler)
 
 	fmt.Println("Starting server on http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", mux)) //Server Starter
@@ -96,7 +97,18 @@ func dataHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(courses)
 }
+
+// /status returns the current status of the server
+func statusHandler(w http.ResponseWriter, r *http.Request) {
+	resp := map[string]string{
+		"status":  "active",
+		"message": "Server is running smoothly",
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(resp)
+}
 func main() {
 	problem1()
+	problem2()
 	mainserver()
 }
