@@ -1,0 +1,20 @@
+[
+	{
+		"Name": "Go Lang",
+		"Price": 50,
+		"Discription": "A breif course and practical Course on Go Lang Cloud.",
+		"Rating": 4
+	},
+	{
+		"Name": "Python",
+		"Price": 45,
+		"Discription": "A breif course and practical Course on Python Machine Learning.",
+		"Rating": 4
+	},
+	{
+		"Name": "Web Dev",
+		"Price": 10,
+		"Discription": "A breif and practical Course on Full Stack Web Development.",
+		"Rating": 3
+	}
+]

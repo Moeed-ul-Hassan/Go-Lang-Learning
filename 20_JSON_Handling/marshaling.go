@@ -14,10 +14,10 @@ type Course struct {
 	Tags     []string `json:"tags,omitempty"`
 }
 
-func main() {
-	fmt.Println("Welcome to JSON Marshaling in Go!") //Marshaling is the process of taking Go data and turning it into JSON...
-	encodeJson()
-}
+// func main() {
+// 	fmt.Println("Welcome to JSON Marshaling in Go!") //Marshaling is the process of taking Go data and turning it into JSON...
+// 	encodeJson()
+// }
 
 func encodeJson() {
 	courses := []Course{
