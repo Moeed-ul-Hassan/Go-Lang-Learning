@@ -25,12 +25,22 @@ func mainserver() {
 	mux.HandleFunc("/about", aboutHandler)
 	mux.HandleFunc("/status", statusHandler)
 
+	// Handlers from ex.go
+	mux.HandleFunc("/problem1/", problem1)
+	mux.HandleFunc("/problem2", problem2)
+	mux.HandleFunc("/challenge1/", challenge1)
+	mux.HandleFunc("/challenge2", challenge2)
+	mux.HandleFunc("/challenge3/", challenge3)
+	mux.HandleFunc("/challenge4", challenge4)
+	mux.HandleFunc("/challenge5/", challenge5)
+	mux.HandleFunc("/challenge6", challenge6)
+
 	fmt.Println("Starting server on http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", mux)) //Server Starter
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Week 3 – Hello World")
+	fmt.Fprintln(w, "Week 3 .Hello World")
 }
 
 // /hello/{name}
@@ -107,8 +117,11 @@ func statusHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(resp)
 }
+
+// /about returns information about the course
+func aboutHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "This is a Go Language Course - Week 3: Web & JSON Basics")
+}
 func main() {
-	problem1()
-	problem2()
 	mainserver()
 }

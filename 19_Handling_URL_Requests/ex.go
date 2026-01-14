@@ -10,7 +10,7 @@ import (
 ✅ SOLUTION 1: Path Parameters
 URL: /products/electronics
 */
-func problem1Handler(w http.ResponseWriter, r *http.Request) {
+func problem1(w http.ResponseWriter, r *http.Request) {
 	// 1. We take the full path: r.URL.Path (which is "/products/electronics")
 	// 2. We cut off the "/products/" part to leave just "electronics"
 	category := strings.TrimPrefix(r.URL.Path, "/products/")
@@ -22,7 +22,7 @@ func problem1Handler(w http.ResponseWriter, r *http.Request) {
 ✅ SOLUTION 2: Query Parameters
 URL: /list?sort=desc&limit=5
 */
-func problem2Handler(w http.ResponseWriter, r *http.Request) {
+func problem2(w http.ResponseWriter, r *http.Request) {
 	// 1. r.URL.Query() gets all the "sticky notes" (?sort=desc&limit=5)
 	// 2. .Get("key") picks the specific one we want
 	sortOrder := r.URL.Query().Get("sort")
