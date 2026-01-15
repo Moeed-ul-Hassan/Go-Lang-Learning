@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100 Golden Rules of Engineering</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent: #f59e0b;
+            /* Amber/Gold for "Golden Rules" */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--accent), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .category-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 15px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            scroll-margin-top: 100px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .rule-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.2s;
+            display: flex;
+            gap: 20px;
+        }
+
+        .rule-card:hover {
+            transform: translateX(10px);
+            border-color: var(--accent);
+        }
+
+        .rule-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            opacity: 0.5;
+            min-width: 50px;
+        }
+
+        .rule-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .rule-content p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>100 Golden Rules</h1>
+            <p class="subtitle">The Engineering Wisdom for your Career</p>
+        </header>
+
+        <div class="category-nav">
+            <button class="nav-btn active" onclick="scrollToSection('philosophy')">🧠 Philosophy</button>
+            <button class="nav-btn" onclick="scrollToSection('go')">🐹 Go Lang</button>
+            <button class="nav-btn" onclick="scrollToSection('arch')">🏗️ Architecture</button>
+            <button class="nav-btn" onclick="scrollToSection('workflow')">🛠️ Workflow</button>
+            <button class="nav-btn" onclick="scrollToSection('debug')">🐛 Debugging</button>
+            <button class="nav-btn" onclick="scrollToSection('career')">🚀 Career</button>
+        </div>
+
+        <div id="content">
+            <!-- Content will be populated by JS -->
+        </div>
+    </div>
+
+    <script>
+        const rules = {
+            philosophy: [
+                { t: "Code is for Humans", d: "Write code to be read by others, not just executed by machines." },
+                { t: "KISS (Keep It Simple, Stupid)", d: "Complexity is the enemy. Simple code is less buggy." },
+                { t: "DRY (Don't Repeat Yourself)", d: "If you copy-paste code, you are creating a future bug." },
+                { t: "YAGNI (You Aren't Gonna Need It)", d: "Don't build features for 'someday'. Build what you need now." },
+                { t: "Boy Scout Rule", d: "Always leave the code cleaner than you found it." },
+                { t: "Premature Optimization", d: "Make it work, make it right, then make it fast." },
+                { t: "Fail Fast", d: "Check for errors immediately. Don't let bad data propagate." },
+                { t: "Comments Explain 'Why'", d: "Code tells you what it does. Comments should explain why." },
+                { t: "Delete Dead Code", d: "Commented-out code is rot. Use Git history." },
+                { t: "Single Responsibility", d: "A function or class should do one thing and do it well." },
+                { t: "Naming is Hard but Critical", d: "Spend time on naming. It communicates intent." },
+                { t: "Consistency > Perfection", d: "A consistent style is better than a mix of styles." },
+                { t: "Code Reviews are for Learning", d: "Don't take feedback personally. Your code is not you." },
+                { t: "Magic Numbers are Bad", d: "Use constants instead of raw numbers in code." },
+                { t: "Learn the Fundamentals", d: "Frameworks change. Algorithms and patterns stay forever." }
+            ],
+            go: [
+                { t: "Idiomatic Go", d: "Follow gofmt and community standards." },
+                { t: "Errors are Values", d: "Handle errors explicitly. Never ignore them." },
+                { t: "Panic is for Emergencies", d: "Only panic if the program literally cannot continue." },
+                { t: "Interfaces are Small", d: "Define interfaces where they are used. Keep them small." },
+                { t: "Accept Interfaces, Return Structs", d: "Makes code flexible and easier to mock." },
+                { t: "Channels vs Mutexes", d: "Channels for data flow, Mutexes for state protection." },
+                { t: "Defer is Your Friend", d: "Use defer to clean up resources immediately." },
+                { t: "Context is King", d: "Always pass context to I/O functions." },
+                { t: "Short Variable Declarations", d: "Use := inside functions." },
+                { t: "Table-Driven Tests", d: "Use them for covering multiple scenarios efficiently." },
+                { t: "Avoid init()", d: "Magic initialization is hard to debug." },
+                { t: "Pointer vs Value Receiver", d: "Use pointers to modify, values otherwise." },
+                { t: "Empty Interface is Last Resort", d: "It bypasses type safety." },
+                { t: "Goroutine Leaks", d: "Never start a goroutine without knowing how it stops." },
+                { t: "Use go mod tidy", d: "Keep dependencies clean." }
+            ],
+            arch: [
+                { t: "Separation of Concerns", d: "UI should not know about Database." },
+                { t: "Dependency Injection", d: "Pass dependencies in, don't create them inside." },
+                { t: "Repository Pattern", d: "Abstract database logic behind an interface." },
+                { t: "Stateless APIs", d: "Store session data in DB/Redis, not memory." },
+                { t: "Idempotency", d: "Making the same request twice should be safe." },
+                { t: "Rate Limiting", d: "Protect your API from abuse." },
+                { t: "Pagination", d: "Never return 'all' records." },
+                { t: "Versioning", d: "APIs change. Version them." },
+                { t: "Health Checks", d: "Every service needs a /health endpoint." },
+                { t: "Graceful Shutdown", d: "Finish requests before stopping." },
+                { t: "Config via Env", d: "Store config in Environment Variables." },
+                { t: "Structured Logging", d: "Log events (JSON), not just text." },
+                { t: "Metrics", d: "Measure Latency, Error Rate, Traffic." },
+                { t: "Caching", d: "Cache expensive operations carefully." },
+                { t: "Security First", d: "Sanitize inputs. Parameterize queries." }
+            ],
+            workflow: [
+                { t: "Master Your IDE", d: "Learn shortcuts. Mouse usage is slow." },
+                { t: "Terminal Proficiency", d: "grep, awk, sed, curl are superpowers." },
+                { t: "Git Hygiene", d: "Commit often. Write meaningful messages." },
+                { t: "Branching Strategy", d: "Use Feature Branches. Don't push to main." },
+                { t: "Pull Requests", d: "Keep them small for better reviews." },
+                { t: "Automate Everything", d: "If you do it twice, automate it." },
+                { t: "CI/CD", d: "Automate testing and deployment." },
+                { t: "Documentation", d: "Document 'How to Run' and 'Architecture'." },
+                { t: "Deep Work", d: "Turn off notifications for focused blocks." },
+                { t: "Rubber Duck Debugging", d: "Explain problems to an inanimate object." },
+                { t: "Learn to Search", d: "Google is a skill." },
+                { t: "Read Code", d: "Reading open source code teaches you more." },
+                { t: "Pair Programming", d: "Spreads knowledge and reduces bugs." },
+                { t: "Ergonomics", d: "Invest in your chair and keyboard." },
+                { t: "Backup Your Work", d: "Push to remote often." }
+            ],
+            debug: [
+                { t: "Reproduce First", d: "You can't fix what you can't reproduce." },
+                { t: "Read the Error", d: "It usually tells you exactly what is wrong." },
+                { t: "Binary Search", d: "Comment out half the code to isolate." },
+                { t: "Check Logs", d: "Server logs usually have the answer." },
+                { t: "Isolate Variables", d: "Change one thing at a time." },
+                { t: "Verify Assumptions", d: "Check things you think are true." },
+                { t: "Check Network", d: "DNS? Firewall? Ports?" },
+                { t: "Check Permissions", d: "Read-only file? Access denied?" },
+                { t: "Restart", d: "Sometimes it actually works." },
+                { t: "Ask for Help", d: "Don't struggle for 4 hours alone." }
+            ],
+            career: [
+                { t: "Communication is Key", d: "Explain your work clearly." },
+                { t: "Under-promise, Over-deliver", d: "Manage expectations." },
+                { t: "Solve Problems", d: "Companies pay for solutions, not just code." },
+                { t: "Learn the Domain", d: "Understand the business you are in." },
+                { t: "Mentorship", d: "Find a mentor. Be a mentor." },
+                { t: "Stay Curious", d: "Keep learning, but don't chase every toy." },
+                { t: "Network", d: "Your next job comes from people you know." },
+                { t: "Build a Portfolio", d: "Show your work." },
+                { t: "Negotiate", d: "Know your worth." },
+                { t: "Work-Life Balance", d: "Burnout is real. Rest." },
+                { t: "Own Mistakes", d: "Admit it, fix it, learn from it." },
+                { t: "Be Kind", d: "Tech is a small world." },
+                { t: "Documentation is Visibility", d: "Writing docs makes you visible." },
+                { t: "Say 'No'", d: "Quality > Quantity." },
+                { t: "Enjoy the Journey", d: "Coding is a superpower." }
+            ]
+        };
+
+        const contentDiv = document.getElementById('content');
+        let globalIndex = 1;
+
+        function render() {
+            for (const [key, items] of Object.entries(rules)) {
+                const section = document.createElement('div');
+                section.className = 'section';
+                section.id = key;
+
+                let title = key.charAt(0).toUpperCase() + key.slice(1);
+                if (key === 'go') title = 'Go Lang';
+                if (key === 'arch') title = 'Architecture';
+                if (key === 'debug') title = 'Debugging';
+
+                section.innerHTML = `<h2 class="section-title">${title}</h2><div class="rules-grid"></div>`;
+
+                const grid = section.querySelector('.rules-grid');
+
+                items.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'rule-card';
+                    card.innerHTML = `
+                        <div class="rule-number">#${globalIndex}</div>
+                        <div class="rule-content">
+                            <h3>${item.t}</h3>
+                            <p>${item.d}</p>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                    globalIndex++;
+                });
+
+                contentDiv.appendChild(section);
+            }
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        render();
+
+    </script>
+</body>
+
+</html>
