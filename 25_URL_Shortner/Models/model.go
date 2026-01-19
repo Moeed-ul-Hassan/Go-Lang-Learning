@@ -1,4 +1,4 @@
-package main
+package models
 
 //Purpose of making this file is "Defining How our data will look like, Here we will define Structs and other."
 type ShortenRequest struct {
