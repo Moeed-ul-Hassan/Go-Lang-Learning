@@ -50,6 +50,7 @@
             font-size: 3.5rem;
             font-weight: 700;
             background: linear-gradient(to right, var(--accent-primary), #fff);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
@@ -192,17 +193,24 @@
                 <button class="filter-btn" data-filter="util">Utils</button>
                 <button class="filter-btn" data-filter="micro">Microservices</button>
                 <button class="filter-btn" data-filter="cloud">Cloud</button>
+                <button class="filter-btn" data-filter="scraping">Scraping</button>
+                <button class="filter-btn" data-filter="validation">Validation</button>
+                <button class="filter-btn" data-filter="concurrency">Concurrency</button>
+                <button class="filter-btn" data-filter="media">Media</button>
+                <button class="filter-btn" data-filter="game">Game</button>
+                <button class="filter-btn" data-filter="science">Science</button>
+                <button class="filter-btn" data-filter="doc">Documentation</button>
             </div>
         </div>
 
         <div class="grid" id="grid">
-            <!-- Content injected via JS for easier management of 100 items -->
+            <!-- Content injected via JS -->
         </div>
     </div>
 
     <script>
         const tools = [
-            // Web
+            // Web Frameworks & HTTP
             { name: "Gin", cat: "web", desc: "High-performance, martini-like API framework." },
             { name: "Echo", cat: "web", desc: "High performance, extensible, minimalist web framework." },
             { name: "Fiber", cat: "web", desc: "Expressjs inspired web framework built on top of Fasthttp." },
@@ -212,9 +220,12 @@
             { name: "Revel", cat: "web", desc: "A high-productivity, full-stack web framework." },
             { name: "Iris", cat: "web", desc: "The fastest web framework for Go." },
             { name: "Gorilla Mux", cat: "web", desc: "A powerful URL router and dispatcher." },
-            { name: "Fasthttp", cat: "web", desc: "Fast HTTP implementation for Go." },
+            { name: "Fasthttp", cat: "web", desc: "Fast HTTP implementation for Go (up to 10x faster than net/http)." },
+            { name: "Go-Restful", cat: "web", desc: "Package for building REST-style web services." },
+            { name: "Alice", cat: "web", desc: "Painless middleware chaining." },
+            { name: "Negroni", cat: "web", desc: "Idiomatic HTTP middleware." },
 
-            // Database
+            // Database, ORM & Storage
             { name: "GORM", cat: "db", desc: "The fantastic ORM library for Golang." },
             { name: "Sqlx", cat: "db", desc: "General purpose extensions to golang's database/sql." },
             { name: "Ent", cat: "db", desc: "An entity framework for Go (by Facebook)." },
@@ -222,87 +233,115 @@
             { name: "Pgx", cat: "db", desc: "PostgreSQL driver and toolkit." },
             { name: "Mongo Driver", cat: "db", desc: "The official MongoDB driver." },
             { name: "Go-Redis", cat: "db", desc: "Type-safe Redis client." },
+            { name: "Redigo", cat: "db", desc: "Another popular Redis client." },
             { name: "Elastic", cat: "db", desc: "Elasticsearch client." },
+            { name: "Bleve", cat: "db", desc: "Modern text indexing library." },
             { name: "Badger", cat: "db", desc: "Fast key-value DB in Go." },
+            { name: "Bolt", cat: "db", desc: "An embedded key/value database." },
             { name: "Sqlc", cat: "db", desc: "Generate type-safe Go from SQL." },
+            { name: "Go-SQLite3", cat: "db", desc: "SQLite3 driver." },
 
-            // Auth
+            // Authentication & Security
             { name: "Golang-JWT", cat: "auth", desc: "JSON Web Tokens (JWT)." },
             { name: "Goth", cat: "auth", desc: "Multi-provider authentication (OAuth)." },
             { name: "Casbin", cat: "auth", desc: "Authorization library (RBAC, ABAC)." },
             { name: "Dex", cat: "auth", desc: "Identity service that uses OpenID Connect." },
+            { name: "Osin", cat: "auth", desc: "OAuth2 server library." },
+            { name: "Paseto", cat: "auth", desc: "Platform-Agnostic Security Tokens." },
             { name: "Argon2", cat: "auth", desc: "Password hashing." },
 
-            // CLI
+            // CLI & Configuration
             { name: "Cobra", cat: "cli", desc: "A commander for modern CLI interactions." },
             { name: "Viper", cat: "cli", desc: "Go configuration with fangs." },
-            { name: "Urfave/cli", cat: "cli", desc: "Simple package for building command line apps." },
+            { name: "Urfave/cli", cat: "cli", desc: "Simple, fast, and fun package for building command line apps." },
+            { name: "Kingpin", cat: "cli", desc: "Command line and flag parser." },
             { name: "Survey", cat: "cli", desc: "Build interactive and accessible CLI prompts." },
             { name: "Godotenv", cat: "cli", desc: "Loads environment variables from .env." },
+            { name: "Envconfig", cat: "cli", desc: "Decode env vars to structs." },
+            { name: "Go-Flags", cat: "cli", desc: "Advanced flag parsing." },
 
-            // Logging
+            // Logging & Observability
             { name: "Zap", cat: "log", desc: "Blazing fast, structured logging." },
             { name: "Logrus", cat: "log", desc: "Structured, pluggable logging." },
             { name: "Zerolog", cat: "log", desc: "Zero allocation JSON logger." },
+            { name: "Lumberjack", cat: "log", desc: "Rolling logger." },
+            { name: "Prometheus", cat: "log", desc: "Instrumentation library for metrics." },
             { name: "Sentry-go", cat: "log", desc: "Sentry client for error tracking." },
+            { name: "Jaeger", cat: "log", desc: "Distributed tracing." },
 
-            // Testing
+            // Testing & Quality
             { name: "Testify", cat: "test", desc: "Assertions and mocks." },
             { name: "Ginkgo", cat: "test", desc: "BDD Testing Framework." },
-            { name: "Gomega", cat: "test", desc: "Matcher/Assertion library." },
+            { name: "Gomega", cat: "test", desc: "Matcher/Assertion library (pairs with Ginkgo)." },
             { name: "GoMock", cat: "test", desc: "Mocking framework." },
-            { name: "K6", cat: "test", desc: "Load testing tool." },
+            { name: "Go-Fuzz", cat: "test", desc: "Randomized testing." },
+            { name: "K6", cat: "test", desc: "Load testing tool (scriptable in JS, written in Go)." },
+            { name: "GolangCI-Lint", cat: "test", desc: "Fast linters runner." },
 
-            // Utils
+            // Utilities & Tools
             { name: "UUID", cat: "util", desc: "UUID generation." },
             { name: "Cast", cat: "util", desc: "Safe and easy casting from one type to another." },
             { name: "Air", cat: "util", desc: "Live reload for Go apps." },
             { name: "Fsnotify", cat: "util", desc: "File system notifications." },
+            { name: "Go-Simple-Mail", cat: "util", desc: "Easy email sending." },
+            { name: "Gofpdf", cat: "util", desc: "PDF generation." },
             { name: "Excelize", cat: "util", desc: "Read/Write Excel files." },
-            { name: "Validator", cat: "util", desc: "Struct and field validation." },
-            { name: "Ants", cat: "util", desc: "High-performance goroutine pool." },
-            { name: "Colly", cat: "util", desc: "Fast and elegant scraping framework." },
-            { name: "Goquery", cat: "util", desc: "jQuery-like syntax for HTML manipulation." },
-            { name: "Imaging", cat: "util", desc: "Simple image processing." },
+            { name: "Go-Humanize", cat: "util", desc: "Format numbers/sizes (e.g., '3 days ago')." },
+            { name: "Mergo", cat: "util", desc: "Merge structs and maps." },
 
-            // Microservices & Cloud
+            // Microservices & Messaging
             { name: "gRPC", cat: "micro", desc: "High performance RPC framework." },
             { name: "Protobuf", cat: "micro", desc: "Protocol Buffers." },
             { name: "Go-Kit", cat: "micro", desc: "Toolkit for microservices." },
+            { name: "Micro", cat: "micro", desc: "Microservice development framework." },
             { name: "NATS", cat: "micro", desc: "Cloud native messaging system." },
             { name: "Sarama", cat: "micro", desc: "Kafka client." },
+            { name: "Amqp", cat: "micro", desc: "RabbitMQ client." },
+            { name: "Watermill", cat: "micro", desc: "Building event-driven applications." },
+
+            // Scraping & Parsing
+            { name: "Colly", cat: "scraping", desc: "Fast and elegant scraping framework." },
+            { name: "Goquery", cat: "scraping", desc: "jQuery-like syntax for HTML manipulation." },
+            { name: "Chromedp", cat: "scraping", desc: "Drive browsers (Chrome) via CDP." },
+            { name: "Blackfriday", cat: "scraping", desc: "Markdown processor." },
+            { name: "Goldmark", cat: "scraping", desc: "Markdown parser (faster)." },
+            { name: "Robotstxt", cat: "scraping", desc: "robots.txt parser." },
+
+            // Validation
+            { name: "Validator", cat: "validation", desc: "Struct and field validation." },
+            { name: "Ozzo-validation", cat: "validation", desc: "Idiomatic data validation." },
+            { name: "Govalidator", cat: "validation", desc: "Validators and sanitizers." },
+
+            // Concurrency & Async
+            { name: "Ants", cat: "concurrency", desc: "High-performance goroutine pool." },
+            { name: "Tunny", cat: "concurrency", desc: "Goroutine pool." },
+            { name: "Conc", cat: "concurrency", desc: "Better structured concurrency." },
+            { name: "Machinery", cat: "concurrency", desc: "Asynchronous task queue (like Celery)." },
+
+            // Image & Media
+            { name: "Imaging", cat: "media", desc: "Simple image processing." },
+            { name: "Gift", cat: "media", desc: "Image filtering toolkit." },
+            { name: "Bimg", cat: "media", desc: "Fast image processing using libvips." },
+
+            // Cloud & DevOps
             { name: "AWS SDK", cat: "cloud", desc: "AWS SDK for Go." },
             { name: "Google Cloud", cat: "cloud", desc: "GCP Client libraries." },
+            { name: "Azure SDK", cat: "cloud", desc: "Azure SDK." },
+            { name: "Terraform Provider", cat: "cloud", desc: "Build Terraform providers." },
             { name: "Docker Client", cat: "cloud", desc: "Docker API client." },
             { name: "K8s Client", cat: "cloud", desc: "Kubernetes client library." },
-            { name: "Terraform", cat: "cloud", desc: "Build Terraform providers." },
 
-            // More to reach 100-ish feel (condensed for script)
-            { name: "Bleve", cat: "db", desc: "Modern text indexing library." },
-            { name: "Bolt", cat: "db", desc: "Embedded key/value database." },
-            { name: "Osin", cat: "auth", desc: "OAuth2 server library." },
-            { name: "Paseto", cat: "auth", desc: "Platform-Agnostic Security Tokens." },
-            { name: "Kingpin", cat: "cli", desc: "Command line and flag parser." },
-            { name: "Envconfig", cat: "cli", desc: "Decode env vars to structs." },
-            { name: "Lumberjack", cat: "log", desc: "Rolling logger." },
-            { name: "Prometheus", cat: "log", desc: "Instrumentation library for metrics." },
-            { name: "Go-Fuzz", cat: "test", desc: "Randomized testing." },
-            { name: "GolangCI-Lint", cat: "test", desc: "Fast linters runner." },
-            { name: "Go-Simple-Mail", cat: "util", desc: "Easy email sending." },
-            { name: "Gofpdf", cat: "util", desc: "PDF generation." },
-            { name: "Go-Humanize", cat: "util", desc: "Format numbers/sizes." },
-            { name: "Mergo", cat: "util", desc: "Merge structs and maps." },
-            { name: "Amqp", cat: "micro", desc: "RabbitMQ client." },
-            { name: "Watermill", cat: "micro", desc: "Event-driven applications." },
-            { name: "Chromedp", cat: "util", desc: "Drive browsers (Chrome) via CDP." },
-            { name: "Blackfriday", cat: "util", desc: "Markdown processor." },
-            { name: "Ozzo-validation", cat: "util", desc: "Idiomatic data validation." },
-            { name: "Tunny", cat: "util", desc: "Goroutine pool." },
-            { name: "Conc", cat: "util", desc: "Better structured concurrency." },
-            { name: "Machinery", cat: "util", desc: "Asynchronous task queue." },
-            { name: "Gift", cat: "util", desc: "Image filtering toolkit." },
-            { name: "Gonum", cat: "util", desc: "Numerical and scientific algorithms." },
-            { name: "Swag", cat: "util", desc: "Swagger generator." }
+            // Game Development
+            { name: "Ebiten", cat: "game", desc: "Dead simple 2D game library." },
+            { name: "Pixel", cat: "game", desc: "2D game library." },
+
+            // Science & Data
+            { name: "Gonum", cat: "science", desc: "Numerical and scientific algorithms." },
+            { name: "Gota", cat: "science", desc: "Dataframes (like Pandas) for Go." },
+
+            // Documentation
+            { name: "Swag", cat: "doc", desc: "Swagger generator." },
+            { name: "Redoc", cat: "doc", desc: "API documentation viewer." }
         ];
 
         const grid = document.getElementById('grid');
@@ -344,11 +383,8 @@
         // Filter Listeners
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all
                 filterBtns.forEach(b => b.classList.remove('active'));
-                // Add to clicked
                 btn.classList.add('active');
-
                 renderTools(btn.dataset.filter, searchInput.value);
             });
         });
