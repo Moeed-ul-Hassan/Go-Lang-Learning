@@ -9,7 +9,7 @@ func increment(val *int) {
 }
 
 func main() {
-	// 1. Declares an integer variable 'count' and initializes it to 5.
+	// 1. Declare an integer variable 'count' and initializes it to 5.
 	count := 5
 	fmt.Println("Initial count:", count) // 5. Print before
 

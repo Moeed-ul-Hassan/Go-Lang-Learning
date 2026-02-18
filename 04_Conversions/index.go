@@ -1,15 +1,15 @@
 package main
 
 import (
-	"bufio"
+	"bufio" //buffer input output.
 	"fmt"
 	"os"
-	"strconv"
+	"strconv" //String conversation.
 	"strings"
 )
 
 func main() {
-	fmt.Println("Welcome to our Pizza App..!") // Corrected typo: "Welcome"
+	fmt.Println("Welcome to our Pizza App..!")
 	fmt.Println("Please enter the pizza size you want to order (e.g., 12 for 12 inches):")
 	reader := bufio.NewReader(os.Stdin)
 	sizeInput, _ := reader.ReadString('\n')
